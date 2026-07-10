@@ -1,0 +1,10 @@
+[FAILED] [setup] global.setup.ts — ⚠️ [FALHA DE LOGIN / SESSÃO] Seeding and authenticating users (51.2s) | ERRO: Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+Locator: locator('aside')
+Expected: visible
+Timeout: 5000ms
+[FAILED] [setup] global.setup.ts — ⚠️ [FALHA DE LOGIN / SESSÃO] Seeding and authenticating users (49.5s) | ERRO: Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+Locator: locator('aside')
+Expected: visible
+Timeout: 5000ms
