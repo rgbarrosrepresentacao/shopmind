@@ -485,7 +485,7 @@ export function ImportProductsModal({
           </div>
 
           {/* Mapping Grid */}
-          <div className="border border-border/50 rounded-xl overflow-hidden max-h-80 overflow-y-auto">
+          <div className="border border-border/50 rounded-xl overflow-auto max-h-80 w-full min-w-0">
             <table className="w-full text-xs">
               <thead className="bg-muted text-muted-foreground font-bold">
                 <tr>
@@ -619,7 +619,7 @@ export function ImportProductsModal({
               <span className="text-[10px] text-rose-500 font-medium">* Linhas em vermelho não serão importadas por erros de dados.</span>
             </div>
             
-            <div className="border border-border/50 rounded-xl overflow-hidden max-h-64 overflow-y-auto">
+            <div className="border border-border/50 rounded-xl overflow-auto max-h-64 w-full min-w-0">
               <table className="w-full text-xs text-left">
                 <thead className="bg-muted text-muted-foreground font-bold">
                   <tr>

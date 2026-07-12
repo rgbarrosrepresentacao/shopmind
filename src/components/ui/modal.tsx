@@ -49,7 +49,7 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
       {/* Backdrop with backdrop-blur */}
       <div
         className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity duration-300 animate-fade-in"
@@ -69,7 +69,7 @@ export const Modal: React.FC<ModalProps> = ({
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between p-5 border-b border-border">
+        <div className="flex items-start justify-between p-3.5 sm:p-5 border-b border-border">
           <div className="flex flex-col gap-1">
             {title && (
               <h3 className="text-base font-bold leading-none tracking-tight">
@@ -91,13 +91,13 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="flex-1 p-5 overflow-y-auto">
+        <div className="flex-1 p-3.5 sm:p-5 overflow-y-auto">
           {children}
         </div>
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-3 p-4 bg-muted/40 border-t border-border">
+          <div className="flex items-center justify-end gap-3 p-3 sm:p-4 bg-muted/40 border-t border-border">
             {footer}
           </div>
         )}

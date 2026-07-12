@@ -348,40 +348,42 @@ export const DashboardClient: React.FC<DashboardClientProps> = ({
               </Button>
             </div>
 
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Venda</TableHead>
-                  <TableHead>Cliente</TableHead>
-                  <TableHead>Valor</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Data</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {recentSales.map((sale) => (
-                  <TableRow key={sale.id}>
-                    <TableCell className="font-mono text-xs text-primary font-bold">
-                      {sale.id}
-                    </TableCell>
-                    <TableCell className="font-semibold text-xs text-foreground">
-                      {sale.client}
-                    </TableCell>
-                    <TableCell className="font-bold text-xs">
-                      {sale.total}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={sale.status === "concluida" ? "success" : "error"} showDot>
-                        {sale.status === "concluida" ? "Concluída" : "Cancelada"}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right text-[10px] text-muted-foreground font-medium">
-                      {sale.date}
-                    </TableCell>
+            <div className="overflow-x-auto w-full min-w-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Venda</TableHead>
+                    <TableHead>Cliente</TableHead>
+                    <TableHead>Valor</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Data</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {recentSales.map((sale) => (
+                    <TableRow key={sale.id}>
+                      <TableCell className="font-mono text-xs text-primary font-bold">
+                        {sale.id}
+                      </TableCell>
+                      <TableCell className="font-semibold text-xs text-foreground">
+                        {sale.client}
+                      </TableCell>
+                      <TableCell className="font-bold text-xs">
+                        {sale.total}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={sale.status === "concluida" ? "success" : "error"} showDot>
+                          {sale.status === "concluida" ? "Concluída" : "Cancelada"}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right text-[10px] text-muted-foreground font-medium">
+                        {sale.date}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </div>
 

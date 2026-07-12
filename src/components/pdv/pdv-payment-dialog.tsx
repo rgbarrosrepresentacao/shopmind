@@ -621,7 +621,7 @@ export const PDVPaymentDialog: React.FC<PDVPaymentDialogProps> = ({
 
           {/* Virtual Touch Keypad */}
           {method !== "multiplo" && (
-            <div className="grid grid-cols-3 gap-1.5 select-none my-1">
+            <div className="hidden md:grid grid-cols-3 gap-1.5 select-none my-1">
               {["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "C"].map((key) => (
                 <button
                   key={key}
