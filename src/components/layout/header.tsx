@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Menu, Search, Bell, ChevronDown, User, Settings, CreditCard, LogOut, Check, AlertTriangle, XCircle, Info, CheckCircle2 } from "lucide-react";
+import { Menu, Search, Bell, ChevronDown, User, Settings, CreditCard, LogOut, Check, AlertTriangle, XCircle, Info, CheckCircle2, Clock } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils/cn";
 import { useLojaAtiva } from "../providers/loja-context";
@@ -40,6 +40,32 @@ export const Header: React.FC<HeaderProps> = ({
   const { grupo, lojaAtiva, perfil } = useLojaAtiva();
 
   const [notificacoes, setNotificacoes] = React.useState<NotificacaoExecutiva[]>([]);
+  const [time, setTime] = React.useState<string>("");
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+    const updateTime = () => {
+      const now = new Date();
+      const days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      const dayName = days[now.getDay()];
+      const dateStr = now.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+      const timeStr = now.toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      });
+      setTime(`${dayName}, ${dateStr} - ${timeStr}`);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const isDono = profile?.tipo === "dono";
 
@@ -172,6 +198,17 @@ export const Header: React.FC<HeaderProps> = ({
         >
           {profile?.tipo === "dono" ? "Período de Testes" : "Plano Ativo"}
         </Badge>
+
+        {/* Real-time Clock Badge */}
+        {mounted && time && (
+          <Badge
+            variant="outline"
+            className="hidden md:inline-flex py-1 px-2.5 text-[10px] font-bold border-violet-500/20 bg-slate-900/50 text-slate-300 gap-1.5 flex items-center shadow-inner"
+          >
+            <Clock className="w-3.5 h-3.5 text-violet-400" />
+            <span className="font-mono">{time}</span>
+          </Badge>
+        )}
 
         {/* Notifications Icon with Realtime Dropdown (Dono Only) */}
         {isDono ? (

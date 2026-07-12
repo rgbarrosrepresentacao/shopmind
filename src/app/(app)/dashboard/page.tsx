@@ -64,12 +64,18 @@ export default async function DashboardPage() {
 
   const salesList = sales || [];
 
+  // Helper for timezone conversion to Brazil/SP
+  const getLocalDate = (dateInput?: Date | string | number): Date => {
+    const d = dateInput ? new Date(dateInput) : new Date();
+    return new Date(d.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+  };
+
   // A. Today's stats
-  const startOfToday = new Date();
+  const startOfToday = getLocalDate();
   startOfToday.setHours(0, 0, 0, 0);
 
   const salesToday = salesList.filter(sale => {
-    const saleDate = new Date(sale.created_at);
+    const saleDate = getLocalDate(sale.created_at);
     return saleDate >= startOfToday;
   });
 
@@ -78,14 +84,14 @@ export default async function DashboardPage() {
   const totalSalesCountToday = activeSalesToday.length;
 
   // B. Yesterday's stats
-  const startOfYesterday = new Date();
+  const startOfYesterday = getLocalDate();
   startOfYesterday.setDate(startOfYesterday.getDate() - 1);
   startOfYesterday.setHours(0, 0, 0, 0);
   const endOfYesterday = new Date(startOfToday);
   endOfYesterday.setMilliseconds(-1);
 
   const salesYesterday = salesList.filter(sale => {
-    const saleDate = new Date(sale.created_at);
+    const saleDate = getLocalDate(sale.created_at);
     return saleDate >= startOfYesterday && saleDate <= endOfYesterday;
   });
 
@@ -119,12 +125,12 @@ export default async function DashboardPage() {
   // D. Weekly Sales History (last 7 days, including today)
   const salesHistoryData = [];
   for (let i = 6; i >= 0; i--) {
-    const d = new Date();
+    const d = getLocalDate();
     d.setDate(d.getDate() - i);
     const dateLabel = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
     
     const daySales = salesList.filter(sale => {
-      const saleDate = new Date(sale.created_at);
+      const saleDate = getLocalDate(sale.created_at);
       return sale.status === 'concluida' &&
              saleDate.getDate() === d.getDate() &&
              saleDate.getMonth() === d.getMonth() &&
@@ -159,9 +165,9 @@ export default async function DashboardPage() {
   const recentSales = salesList
     .slice(0, 5)
     .map(sale => {
-      const saleDate = new Date(sale.created_at);
-      const today = new Date();
-      const yesterday = new Date();
+      const saleDate = getLocalDate(sale.created_at);
+      const today = getLocalDate();
+      const yesterday = getLocalDate();
       yesterday.setDate(yesterday.getDate() - 1);
       
       let dateStr = "";
