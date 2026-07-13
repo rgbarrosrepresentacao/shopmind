@@ -29,6 +29,7 @@ import {
   FileText,
   Building2,
   TrendingUp,
+  Laptop,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -120,6 +121,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         { name: "Usuários", href: "/dashboard/usuarios", icon: UserPlus, isOwner: true },
         { name: "Configurações", href: "/dashboard/configuracoes", icon: Settings },
         { name: "Assinatura", href: "/dashboard/assinatura", icon: CreditCard, disabled: true },
+        { name: "Aplicativo PC", href: "/dashboard/downloads", icon: Laptop },
       ],
     },
   ];
@@ -144,17 +146,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
     if (userTipo === "estoquista") {
       // estoquista: Vê apenas: Produtos, Estoque, Compras, Fornecedores e o Dashboard principal + Transferências
       items = items.filter(item => 
-        ["Dashboard", "Produtos", "Estoque", "Compras", "Fornecedores", "Transferências"].includes(item.name)
+        ["Dashboard", "Produtos", "Estoque", "Compras", "Fornecedores", "Transferências", "Aplicativo PC"].includes(item.name)
       );
     } else if (userTipo === "caixa" || userTipo === "vendedor") {
       // caixa / vendedor: Vê apenas: PDV, Controle de Caixa, Clientes, e Dashboard
       items = items.filter(item => 
-        ["Dashboard", "PDV / Caixa", "Controle de Caixa", "Clientes"].includes(item.name)
+        ["Dashboard", "PDV / Caixa", "Controle de Caixa", "Clientes", "Aplicativo PC"].includes(item.name)
       );
     } else if (userTipo === "financeiro") {
       // financeiro: Vê apenas: Financeiro, Relatórios, Dashboard + Estoque Corporativo e Transferências
       items = items.filter(item => 
-        ["Dashboard", "Financeiro", "Relatórios", "Estoque Corporativo", "Transferências"].includes(item.name)
+        ["Dashboard", "Financeiro", "Relatórios", "Estoque Corporativo", "Transferências", "Aplicativo PC"].includes(item.name)
       );
     }
 
